@@ -1,9 +1,9 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Bell, Home, Calendar, Activity, User, ChevronRight } from 'lucide-react'
+import {  Home, Calendar, Activity, User, ChevronRight } from 'lucide-react'
 import { LineChart, Line } from 'recharts'
-import { Link, Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default function Dashboard() {
     const [currentDate, setCurrentDate] = useState(new Date())

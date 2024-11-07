@@ -1,5 +1,5 @@
 import './App.css'
-import { Loader } from 'lucide-react'  // Import only the icons you need from lucide-react
+ // Import only the icons you need from lucide-react
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Dashboard from './Dashboard'
 import Loading from './Loading'

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { ChevronLeft, Activity, Clock, AlertTriangle } from 'lucide-react'
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
-import {  AlertCircle, Home, Calendar, User } from 'lucide-react'
+import {  Home, Calendar, User } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 export default function Details() {

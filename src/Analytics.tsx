@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { ChevronLeft, Heart, Droplets, Watch, Activity, Zap, Timer } from 'lucide-react'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts'
-import { AlertCircle, Home, Calendar, User } from 'lucide-react'
+import {  Home, Calendar, User } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 export default function Analytics() {
