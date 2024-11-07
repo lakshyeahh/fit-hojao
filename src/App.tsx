@@ -6,7 +6,7 @@ import Loading from './Loading'
 import PreGameForm from './PreGame'
 import Details from './Details'
 import Analytics from './Analytics'
-import User from './User'
+
 
 function App() {
   return (
