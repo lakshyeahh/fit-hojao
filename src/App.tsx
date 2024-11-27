@@ -6,6 +6,7 @@ import Loading from './Loading'
 import PreGameForm from './PreGame'
 import Details from './Details'
 import Analytics from './Analytics'
+import UserDetails from './user-page'
 
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
         <Route path="/pre-game" element={<PreGameForm />} />
         <Route path="/details" element={<Details />} />
         <Route path="/activity" element={<Analytics />} />
-        {/* <Route path="/user" element={<User />} /> */}
+        <Route path="/user" element={<UserDetails />} />
 
 
       </Routes>
