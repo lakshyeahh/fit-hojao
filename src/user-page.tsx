@@ -6,12 +6,12 @@ import { Link } from 'react-router-dom'
 
 export default function UserDetails() {
   const [user, setUser] = useState({
-    name: 'Alex Johnson',
-    age: 28,
-    sport: 'Soccer',
-    position: 'Midfielder',
-    height: 180, // cm
-    weight: 75, // kg
+    name: 'Cristiano Ronaldo',
+    age: 38,
+    sport: 'Football',
+    position: 'Forward',
+    height: 187, // cm
+    weight: 85, // kg
     achievements: [
       'League MVP 2023',
       'National Team Selection',
@@ -22,14 +22,7 @@ export default function UserDetails() {
   return (
     <div className="max-w-md mx-auto bg-black min-h-screen pb-16 text-white">
       {/* Status Bar */}
-      <div className="flex justify-between items-center p-4 text-sm text-gray-400">
-        <span>9:41</span>
-        <div className="flex gap-1">
-          <span>●●●●</span>
-          <span>WiFi</span>
-          <span>100%</span>
-        </div>
-      </div>
+      
 
       {/* Header */}
       <div className="p-6">
@@ -138,29 +131,7 @@ export default function UserDetails() {
         </div>
       </div>
 
-      <div className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 flex justify-around py-4 px-6">
-                <button className="text-gray-600">
-                    <Link to={'/dashboard'}>
-                        <Home className="w-6 h-6" />
-                    </Link>
-                </button>
-
-                <button className="text-gray-600">
-                    <Link to={'/pre-game'}>
-                        <Calendar className="w-6 h-6" />
-                    </Link>
-                </button>
-                <button className="text-gray-600">
-                    <Link to={'/activity'}>
-                        <Activity className="w-6 h-6" />
-                    </Link>
-                </button>
-                <button className="text-[#c2ff00]">
-                    <Link to={'/user'}>
-                        <User className="w-6 h-6" />
-                    </Link>
-                </button>
-            </div>
+    
     </div>
   )
 }

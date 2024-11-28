@@ -31,21 +31,15 @@ export default function Loading() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white">
       {/* Status Bar */}
-      <div className="fixed top-0 left-0 right-0 flex justify-between items-center p-4 text-sm text-gray-400">
-        <span>9:41</span>
-        <div className="flex gap-1">
-          <span>●●●●</span>
-          <span>WiFi</span>
-          <span>100%</span>
-        </div>
-      </div>
+     
 
       {/* Logo and App Name */}
       <div className="mb-8 text-center">
         <div className="inline-block p-4 bg-gray-900 rounded-full mb-4">
           <Activity className="w-16 h-16 text-[#c2ff00]" />
         </div>
-        <h1 className="text-3xl font-bold">AthleteShield</h1>
+        <h1 className="text-3xl font-bold">Guardian</h1>
+        <p className="text-sm text-gray-400 mt-2 font-mono">predict. prevent. perform.</p>
       </div>
 
       {/* Loading Animation */}
