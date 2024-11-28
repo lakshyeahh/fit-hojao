@@ -4,57 +4,75 @@ import { fetchGoogleFitData } from './api/googlefit';
 
 const app = express();
 
-// Configure CORS for production
+// Error handling wrapper
+const asyncHandler = (fn: Function) => (req: Request, res: Response) => {
+  Promise.resolve(fn(req, res)).catch((error) => {
+    console.error('Server Error:', error);
+    res.status(500).json({
+      error: 'Internal Server Error',
+      message: error.message,
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
+  });
+};
+
+// Configure CORS
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
     ? ['https://fit-hojao.vercel.app'] 
     : 'http://localhost:5173',
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json());
 
-// Root endpoint
-app.get('/', (req, res) => {
-  res.json({ message: 'API is running' });
+// Basic request logging
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path}`);
+  next();
 });
 
+// Root endpoint
+app.get('/', asyncHandler(async (req: Request, res: Response) => {
+  res.json({ message: 'API is running', timestamp: new Date().toISOString() });
+}));
+
 // Health check endpoint
-app.get('/health', (req, res) => {
-  res.json({ status: 'ok' });
-});
+app.get('/health', asyncHandler(async (req: Request, res: Response) => {
+  res.json({ 
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    env: process.env.NODE_ENV
+  });
+}));
 
 // Google Fit data endpoint
 const googleFitHandler = async (req: Request, res: Response) => {
   try {
     const accessToken = req.headers.authorization?.split(' ')[1];
     if (!accessToken) {
-      console.error('No access token provided');
-      res.status(401).json({ error: 'No access token provided' });
-      return;
+      return res.status(401).json({ error: 'No access token provided' });
     }
 
-    console.log('Fetching Google Fit data with token:', accessToken.substring(0, 10) + '...');
     const data = await fetchGoogleFitData(accessToken);
-    console.log('Successfully fetched Google Fit data:', data);
     res.json(data);
   } catch (error: any) {
-    console.error('Error in Google Fit handler:', error);
+    console.error('Google Fit Error:', error);
     
     if (error.code === 401) {
-      res.status(401).json({ 
+      return res.status(401).json({ 
         error: 'Unauthorized access to Google Fit API',
         details: error.message
       });
-      return;
     }
 
     if (error.code === 403) {
-      res.status(403).json({ 
+      return res.status(403).json({ 
         error: 'Access forbidden to Google Fit API',
         details: error.message
       });
-      return;
     }
 
     res.status(500).json({ 
@@ -64,11 +82,25 @@ const googleFitHandler = async (req: Request, res: Response) => {
   }
 };
 
-app.get('/googlefit/data', googleFitHandler);
+app.get('/googlefit/data', asyncHandler(googleFitHandler));
 
-// Error handling middleware
+// 404 handler
 app.use((req, res) => {
-  res.status(404).json({ error: 'Not Found' });
+  res.status(404).json({ 
+    error: 'Not Found',
+    path: req.path,
+    method: req.method
+  });
+});
+
+// Global error handler
+app.use((err: any, req: Request, res: Response, next: Function) => {
+  console.error('Unhandled Error:', err);
+  res.status(500).json({
+    error: 'Internal Server Error',
+    message: err.message,
+    stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
+  });
 });
 
 // For local development

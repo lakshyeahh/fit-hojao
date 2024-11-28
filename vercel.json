@@ -9,10 +9,17 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "server/index.ts"
+      "dest": "server/index.ts",
+      "methods": ["GET", "POST", "OPTIONS"]
     }
   ],
   "env": {
     "NODE_ENV": "production"
+  },
+  "functions": {
+    "server/index.ts": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
   }
 }
