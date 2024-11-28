@@ -1,18 +1,31 @@
-import express, { RequestHandler, Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import { fetchGoogleFitData } from './api/googlefit';
 
 const app = express();
-const port = 3000;
 
+// Configure CORS for production
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://fit-hojao.vercel.app'] 
+    : 'http://localhost:5173',
   credentials: true
 }));
+
 app.use(express.json());
 
+// Root endpoint
+app.get('/', (req, res) => {
+  res.json({ message: 'API is running' });
+});
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
+
 // Google Fit data endpoint
-const googleFitHandler: RequestHandler = async (req, res) => {
+const googleFitHandler = async (req: Request, res: Response) => {
   try {
     const accessToken = req.headers.authorization?.split(' ')[1];
     if (!accessToken) {
@@ -51,8 +64,19 @@ const googleFitHandler: RequestHandler = async (req, res) => {
   }
 };
 
-app.get('/api/googlefit/data', googleFitHandler);
+app.get('/googlefit/data', googleFitHandler);
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
-}); 
+// Error handling middleware
+app.use((req, res) => {
+  res.status(404).json({ error: 'Not Found' });
+});
+
+// For local development
+if (process.env.NODE_ENV !== 'production') {
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+  });
+}
+
+export default app; 
