@@ -3,4 +3,52 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    @apply antialiased bg-black;
+  }
+  
+  body {
+    @apply bg-black min-h-screen w-full;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@layer components {
+  .container-tablet {
+    @apply w-full px-4 sm:px-6 md:px-8;
+  }
+  
+  .card-tablet {
+    @apply bg-gray-900 rounded-xl p-4 sm:p-6 md:p-8 w-full;
+  }
+  
+  .input-tablet {
+    @apply w-full;
+  }
+  
+  .button-tablet {
+    @apply w-full sm:w-auto px-4 py-2 sm:px-6 sm:py-3;
+  }
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c2ff00;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a6d600;
+}
+
 

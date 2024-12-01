@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { ChevronLeft, AlertTriangle, Zap, Activity, Footprints, Dumbbell, Moon, Shield, Clipboard, BarChart } from 'lucide-react'
 import { LucideIcon } from 'lucide-react'
+import { Link } from 'react-router-dom';
 
 interface PreventionCardProps {
   title: string;
@@ -102,9 +103,9 @@ const InjuryPart = () => {
     <div className="max-w-md mx-auto bg-black min-h-screen text-white p-6">
       {/* Header */}
       <div className="flex items-center mb-6">
-        <button className="mr-4">
+        <Link to="/details" className="mr-4">
           <ChevronLeft className="w-6 h-6 text-[#c2ff00]" />
-        </button>
+        </Link>
         <h1 className="text-2xl font-bold text-white">Injury Risk Assessment</h1>
       </div>
 

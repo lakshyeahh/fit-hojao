@@ -1,16 +1,16 @@
 import './App.css'
-// Import only the icons you need from lucide-react
 import { RouterProvider } from 'react-router-dom'
 import { router } from './routes/routes'
 import { AuthProvider } from './contexts/AuthContext'
 
-
 function App() {
-
-  return <AuthProvider>
-    <RouterProvider router={router} />
-  </AuthProvider>
-
+  return (
+    <AuthProvider>
+      <div className="min-h-screen bg-black">
+        <RouterProvider router={router} />
+      </div>
+    </AuthProvider>
+  )
 }
 
 export default App

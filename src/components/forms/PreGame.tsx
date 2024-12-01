@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { ChevronLeft, Clock, Activity, Zap } from 'lucide-react'
+import { Clock, Activity, Zap } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 export default function GameAssessment() {
   const [activeForm, setActiveForm] = useState<'pre' | 'post'>('pre')
@@ -215,9 +216,6 @@ export default function GameAssessment() {
       {/* Header */}
       <div className="p-6">
         <div className="flex items-center mb-6">
-          <button className="mr-4">
-            <ChevronLeft className="w-6 h-6 text-[#c2ff00]" />
-          </button>
           <h1 className="text-2xl font-bold">
             {activeForm === 'pre' ? 'Pre-Game' : 'Post-Game'} Assessment
           </h1>

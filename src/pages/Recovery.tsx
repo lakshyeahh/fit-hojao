@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { ChevronLeft, Activity, Zap, BarChart, CheckCircle } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 export default function RecoveryPage() {
   const [recoveryProgress, setRecoveryProgress] = useState(65)
@@ -27,9 +28,9 @@ export default function RecoveryPage() {
     <div className="max-w-md mx-auto bg-black min-h-screen text-white p-6">
       {/* Header */}
       <div className="flex items-center mb-6">
-        <button className="mr-4">
+        <Link to="/dashboard" className="mr-4">
           <ChevronLeft className="w-6 h-6 text-[#c2ff00]" />
-        </button>
+        </Link>
         <h1 className="text-2xl font-bold">Recovery</h1>
       </div>
 

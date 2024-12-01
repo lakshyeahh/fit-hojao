@@ -27,9 +27,9 @@ export default function UserDetails() {
       {/* Header */}
       <div className="p-6">
         <div className="flex items-center mb-6">
-          <button className="mr-4">
+          <Link to="/dashboard" className="mr-4">
             <ChevronLeft className="w-6 h-6 text-[#c2ff00]" />
-          </button>
+          </Link>
           <h1 className="text-2xl font-bold">Athlete Profile</h1>
         </div>
 

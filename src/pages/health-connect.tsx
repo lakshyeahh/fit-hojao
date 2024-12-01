@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { ChevronLeft, Bluetooth, Watch, CheckCircle, XCircle, RefreshCw } from 'lucide-react'
+import { Link } from 'react-router-dom';
 
 interface Device {
   id: string;
@@ -50,9 +51,9 @@ export default function SmartwatchLink() {
       {/* Header */}
       <div className="p-6">
         <div className="flex items-center mb-6">
-          <button className="mr-4">
+          <Link to="/health-connect" className="mr-4">
             <ChevronLeft className="w-6 h-6 text-[#c2ff00]" />
-          </button>
+          </Link>
           <h1 className="text-2xl font-bold">Link Your Smartwatch</h1>
         </div>
 
