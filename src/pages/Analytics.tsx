@@ -124,8 +124,12 @@ export default function Analytics() {
         throw new Error('No Google Fit access token found')
       }
 
-      const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000'
-      console.log('Making API request to:', `${baseUrl}/api/googlefit/data`)
+      const isDevelopment = import.meta.env.DEV
+      const baseUrl = isDevelopment 
+        ? 'http://localhost:3000'
+        : 'https://guardian-serverr.vercel.app/api'
+      
+      console.log('Making API request to:', `${baseUrl}/googlefit/data`)
       
       const response = await fetch(`${baseUrl}/googlefit/data`, {
         credentials: 'include',
