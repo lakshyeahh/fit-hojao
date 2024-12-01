@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Activity, RefreshCcw } from 'lucide-react'
+import { Activity, RefreshCcw, ChevronRight, Watch, Clock, Zap } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 
 interface HealthApp {
@@ -195,6 +195,35 @@ export default function HealthConnect() {
       <div className="mb-8">
         <h1 className="text-2xl font-bold mb-2">Connect Your Health Apps</h1>
         <p className="text-gray-400">Link your fitness devices and apps to sync your health data.</p>
+      </div>
+
+      <button 
+        onClick={() => navigate('/connect-device')}
+        className="w-full mb-6 py-3 px-4 bg-gray-900 rounded-xl flex items-center justify-between hover:bg-gray-800 transition-colors"
+      >
+        <div className="flex items-center">
+          <Watch className="w-5 h-5 text-[#c2ff00] mr-3" />
+          <span>Integrate with Smartwatch</span>
+        </div>
+        <ChevronRight className="w-5 h-5 text-gray-400" />
+      </button>
+
+      <div className="mb-8 bg-gray-900/50 rounded-xl p-4">
+        <h3 className="text-sm font-semibold text-[#c2ff00] mb-2">Upcoming Features</h3>
+        <ul className="text-sm text-gray-400 space-y-2">
+          <li className="flex items-center">
+            <Clock className="w-4 h-4 mr-2" />
+            Real-time heart rate monitoring
+          </li>
+          <li className="flex items-center">
+            <Activity className="w-4 h-4 mr-2" />
+            Advanced sleep tracking
+          </li>
+          <li className="flex items-center">
+            <Zap className="w-4 h-4 mr-2" />
+            Stress level analysis
+          </li>
+        </ul>
       </div>
 
       {error && (
