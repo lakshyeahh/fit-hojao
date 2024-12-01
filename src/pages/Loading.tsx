@@ -36,7 +36,11 @@ export default function Loading() {
       {/* Logo and App Name */}
       <div className="mb-8 text-center">
         <div className="inline-block p-4 bg-gray-900 rounded-full mb-4">
-          <Activity className="w-16 h-16 text-[#c2ff00]" />
+          <img 
+            src="/192.png"
+            alt="Guardian Logo"
+            className="w-16 h-16 object-cover rounded-full"
+          />
         </div>
         <h1 className="text-3xl font-bold">Guardian</h1>
         <p className="text-sm text-gray-400 mt-2 font-mono">predict. prevent. perform.</p>

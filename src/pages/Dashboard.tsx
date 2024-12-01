@@ -1,13 +1,14 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import {  Home, Calendar, Activity, User, ChevronRight } from 'lucide-react'
-import { LineChart, Line } from 'recharts'
+import { Home, Calendar, Activity, User, ChevronRight, Zap, Droplet, Brain, Heart, Dumbbell, Flame, TrendingUp, AlertTriangle } from 'lucide-react'
+import { LineChart, Line, BarChart, Bar, XAxis, Tooltip, ResponsiveContainer } from 'recharts'
 import { Link } from 'react-router-dom'
 
 export default function Dashboard() {
     const [currentDate, setCurrentDate] = useState(new Date())
     const [dateRange, setDateRange] = useState<Date[]>([])
+    const [greeting, setGreeting] = useState('')
 
     useEffect(() => {
         const today = new Date()
@@ -18,6 +19,11 @@ export default function Dashboard() {
             dates.push(date)
         }
         setDateRange(dates)
+
+        const hour = today.getHours()
+        if (hour < 12) setGreeting('Good morning')
+        else if (hour < 18) setGreeting('Good afternoon')
+        else setGreeting('Good evening')
     }, [])
 
     const formatDate = (date: Date) => {
@@ -39,25 +45,57 @@ export default function Dashboard() {
         { opponent: 'Cyclones', date: 'Mar 22', time: '18:30', risk: 42 },
     ]
 
+    // Mock data for performance insights
+    const performanceData = [
+        { name: 'Speed', value: 85 },
+        { name: 'Agility', value: 70 },
+        { name: 'Strength', value: 90 },
+        { name: 'Endurance', value: 75 },
+    ]
+
     return (
         <div className="max-w-md mx-auto bg-black min-h-screen pb-16 text-white">
             {/* Status Bar */}
-            <div className="flex justify-between items-center p-4 text-sm text-gray-400">
-                <span>9:41</span>
-                <div className="flex gap-1">
-                    <span>●●●●</span>
-                    <span>WiFi</span>
-                    <span>100%</span>
-                </div>
-            </div>
+           
 
             {/* Header */}
             <div className="p-6">
                 <div className="flex justify-between items-start mb-8">
-                    <h1 className="text-3xl font-bold">Dashboard</h1>
-                    <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center">
-                        <User className="w-5 h-5" />
+                    <div>
+                        <h1 className="text-3xl font-bold">{greeting}, Alex</h1>
+                        <p className="text-gray-400">Let's check your performance</p>
                     </div>
+                    <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center">
+                        <User className="w-6 h-6" />
+                    </div>
+                </div>
+
+                {/* Quick Actions */}
+                <div className="grid grid-cols-4 gap-4 mb-6">
+                    <Link to="/pre-game" className="flex flex-col items-center">
+                        <div className="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center mb-1">
+                            <Zap className="w-6 h-6 text-white" />
+                        </div>
+                        <span className="text-xs text-center">Pre-Game Check</span>
+                    </Link>
+                    <Link to="/recovery" className="flex flex-col items-center">
+                        <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center mb-1">
+                            <Droplet className="w-6 h-6 text-white" />
+                        </div>
+                        <span className="text-xs text-center">Recovery</span>
+                    </Link>
+                    <Link to="/training" className="flex flex-col items-center">
+                        <div className="w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center mb-1">
+                            <Dumbbell className="w-6 h-6 text-white" />
+                        </div>
+                        <span className="text-xs text-center">Training</span>
+                    </Link>
+                    <Link to="/activity" className="flex flex-col items-center">
+                        <div className="w-12 h-12 rounded-full bg-purple-500 flex items-center justify-center mb-1">
+                            <Brain className="w-6 h-6 text-white" />
+                        </div>
+                        <span className="text-xs text-center">Insights</span>
+                    </Link>
                 </div>
 
                 {/* Date Range Display */}
@@ -118,15 +156,59 @@ export default function Dashboard() {
                         </button>
                     </div>
                     <div className="h-32 w-full">
-                        <LineChart width={280} height={128} data={injuryRiskData}>
-                            <Line
-                                type="monotone"
-                                dataKey="value"
-                                stroke="#c2ff00"
-                                strokeWidth={2}
-                                dot={false}
-                            />
-                        </LineChart>
+                        <ResponsiveContainer width="100%" height="100%">
+                            <LineChart data={injuryRiskData}>
+                                <Line
+                                    type="monotone"
+                                    dataKey="value"
+                                    stroke="#c2ff00"
+                                    strokeWidth={2}
+                                    dot={false}
+                                />
+                                <Tooltip
+                                    contentStyle={{
+                                        backgroundColor: '#1F2937',
+                                        border: 'none',
+                                        borderRadius: '8px',
+                                        color: '#fff'
+                                    }}
+                                />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
+                    <div className="mt-4 space-y-2">
+                        <div className="flex items-center text-sm">
+                            <AlertTriangle className="w-4 h-4 text-yellow-500 mr-2" />
+                            <span>High impact on ankle detected</span>
+                        </div>
+                        <div className="flex items-center text-sm">
+                            <TrendingUp className="w-4 h-4 text-green-500 mr-2" />
+                            <span>Improved knee stability</span>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Performance Insights */}
+                <div className="bg-gray-900 rounded-2xl p-4 mb-6">
+                    <h2 className="text-xl font-semibold mb-4">Performance Insights</h2>
+                    <div className="h-40 w-full">
+                        <ResponsiveContainer width="100%" height="100%">
+                            <BarChart data={performanceData}>
+                                <XAxis dataKey="name" stroke="#ffffff" />
+                                <Tooltip
+                                    contentStyle={{
+                                        backgroundColor: '#1F2937',
+                                        border: 'none',
+                                        borderRadius: '8px',
+                                        color: '#fff'
+                                    }}
+                                />
+                                <Bar dataKey="value" fill="#c2ff00" />
+                            </BarChart>
+                        </ResponsiveContainer>
+                    </div>
+                    <div className="mt-4 text-sm text-gray-400">
+                        Your strength has improved by 5% this week.
                     </div>
                 </div>
 
@@ -136,7 +218,7 @@ export default function Dashboard() {
                     <div className="grid grid-cols-2 gap-3">
                         <div className="bg-gray-900 rounded-2xl p-4">
                             <div className="flex justify-between items-center mb-2">
-                                <Activity className="w-5 h-5 text-[#c2ff00]" />
+                                <Flame className="w-5 h-5 text-[#c2ff00]" />
                                 <span className="text-xs text-gray-400">Today</span>
                             </div>
                             <p className="text-sm text-gray-400">Training Load</p>
@@ -149,6 +231,22 @@ export default function Dashboard() {
                             </div>
                             <p className="text-sm text-gray-400">Time Needed</p>
                             <p className="text-xl font-bold">48h</p>
+                        </div>
+                        <div className="bg-gray-900 rounded-2xl p-4">
+                            <div className="flex justify-between items-center mb-2">
+                                <Heart className="w-5 h-5 text-red-400" />
+                                <span className="text-xs text-gray-400">HRV</span>
+                            </div>
+                            <p className="text-sm text-gray-400">Latest Reading</p>
+                            <p className="text-xl font-bold">65ms</p>
+                        </div>
+                        <div className="bg-gray-900 rounded-2xl p-4">
+                            <div className="flex justify-between items-center mb-2">
+                                <Brain className="w-5 h-5 text-purple-400" />
+                                <span className="text-xs text-gray-400">Readiness</span>
+                            </div>
+                            <p className="text-sm text-gray-400">Today's Score</p>
+                            <p className="text-xl font-bold">82%</p>
                         </div>
                     </div>
                 </div>

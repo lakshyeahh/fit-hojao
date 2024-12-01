@@ -1,7 +1,7 @@
 import './App.css'
 // Import only the icons you need from lucide-react
 import { RouterProvider } from 'react-router-dom'
-import { router } from './routes'
+import { router } from './routes/routes'
 import { AuthProvider } from './contexts/AuthContext'
 
 

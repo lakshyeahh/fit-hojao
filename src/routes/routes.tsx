@@ -1,17 +1,22 @@
 import { createBrowserRouter, isRouteErrorResponse, useRouteError } from 'react-router-dom'
-import Loading from './Loading'
-import Dashboard from './Dashboard'
-import PreGameForm from './PreGame'
-import Details from './Details'
-import Analytics from './Analytics'
-import UserDetails from './user-page'
-import UserRegistration from './user-registration'
-import SmartwatchLink from './health-connect'
-import Layout from './Layout'
-import HealthConnect from './integerations'
-import OnboardingSlideshow from './Onboarding'
-import OAuthCallback from './routes/oauth/callback'
-import ProtectedRoute from './routes/ProtectedRoute'
+import Loading from '../pages/Loading'
+import Dashboard from '../pages/Dashboard'
+import PreGameForm from '../components/forms/PreGame'
+import Details from '../pages/Details'
+import Analytics from '../pages/Analytics'
+import UserDetails from '../pages/user-page'
+import UserRegistration from '../components/forms/user-registration'
+import SmartwatchLink from '../pages/health-connect'
+import Layout from '../components/layout/Layout'
+import HealthConnect from '../pages/integerations'
+import OnboardingSlideshow from '../pages/Onboarding'
+import OAuthCallback from './oauth/callback'
+import ProtectedRoute from './ProtectedRoute'
+import InjuryPredictionDetails from '../pages/InjuryPredictionDetails'
+import InjuryPart from '../pages/InjuryPart'
+import RestDayDetails from '../pages/RestDayDetials'
+import RecoveryPage from '../pages/Recovery'
+import TrainingPage from '../pages/Training'
 
 // Error Boundary Component
 function ErrorBoundary() {
@@ -122,10 +127,30 @@ export const router = createBrowserRouter([
           </ProtectedRoute>
         )
       },
-      {
-        path: 'oauth/callback',
-        element: <OAuthCallback />
-      }
+        {
+          path: 'oauth/callback',
+          element: <OAuthCallback />
+        },
+        {
+          path: 'injury-prediction-details',
+          element: <InjuryPredictionDetails />
+        },
+        {
+          path: 'injury-part',
+          element: <InjuryPart />
+        },
+        {
+          path: 'rest-day-details',
+          element: <RestDayDetails />
+        },
+        {
+          path: 'recovery',
+          element: <RecoveryPage />
+        },
+        {
+          path: 'training',
+          element: <TrainingPage />
+        }
     ]
   }
 ], {

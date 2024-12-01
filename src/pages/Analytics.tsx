@@ -106,7 +106,7 @@ export default function Analytics() {
       const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
       console.log('Making API request to:', `${baseUrl}/api/googlefit/data`);
       
-      const response = await fetch(`${baseUrl}/api/googlefit/data`, {
+      const response = await fetch(`${baseUrl}/googlefit/data`, {
         credentials: 'include',
         headers: {
           'Accept': 'application/json',

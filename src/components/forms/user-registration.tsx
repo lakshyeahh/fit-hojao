@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { User, Upload, ChevronRight, Info, Activity, Heart, Dumbbell } from 'lucide-react'
-import { useAuth } from './contexts/AuthContext'
+import { useAuth } from '../../contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
 
 export default function UserRegistration() {

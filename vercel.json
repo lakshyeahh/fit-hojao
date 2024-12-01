@@ -8,18 +8,15 @@
   ],
   "routes": [
     {
+      "src": "/api/(.*)",
+      "dest": "/server/index.ts"
+    },
+    {
       "src": "/(.*)",
-      "dest": "server/index.ts",
-      "methods": ["GET", "POST", "OPTIONS"]
+      "dest": "/server/index.ts"
     }
   ],
   "env": {
     "NODE_ENV": "production"
-  },
-  "functions": {
-    "server/index.ts": {
-      "memory": 1024,
-      "maxDuration": 10
-    }
   }
 }

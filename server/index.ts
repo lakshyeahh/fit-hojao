@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response, RequestHandler } from 'express';
 import cors from 'cors';
 import { fetchGoogleFitData } from './api/googlefit';
 
@@ -49,11 +49,12 @@ app.get('/health', asyncHandler(async (req: Request, res: Response) => {
 }));
 
 // Google Fit data endpoint
-const googleFitHandler = async (req: Request, res: Response) => {
+const googleFitHandler: RequestHandler = async (req, res, next) => {
   try {
     const accessToken = req.headers.authorization?.split(' ')[1];
     if (!accessToken) {
-      return res.status(401).json({ error: 'No access token provided' });
+      res.status(401).json({ error: 'No access token provided' });
+      return;
     }
 
     const data = await fetchGoogleFitData(accessToken);
@@ -62,17 +63,19 @@ const googleFitHandler = async (req: Request, res: Response) => {
     console.error('Google Fit Error:', error);
     
     if (error.code === 401) {
-      return res.status(401).json({ 
+      res.status(401).json({ 
         error: 'Unauthorized access to Google Fit API',
         details: error.message
       });
+      return;
     }
 
     if (error.code === 403) {
-      return res.status(403).json({ 
+      res.status(403).json({ 
         error: 'Access forbidden to Google Fit API',
         details: error.message
       });
+      return;
     }
 
     res.status(500).json({ 
