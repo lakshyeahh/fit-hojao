@@ -4,6 +4,10 @@ import { fetchGoogleFitData } from './api/googlefit';
 
 const app = express();
 
+const REDIRECT_URI = process.env.NODE_ENV === 'production'
+  ? 'https://guardian-main.vercel.app/oauth/callback'
+  : 'http://localhost:3000/oauth/callback';
+
 // Error handling wrapper
 const asyncHandler = (fn: Function) => (req: Request, res: Response) => {
   Promise.resolve(fn(req, res)).catch((error) => {
@@ -19,7 +23,7 @@ const asyncHandler = (fn: Function) => (req: Request, res: Response) => {
 // Configure CORS
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? ['https://fit-hojao.vercel.app'] 
+    ? ['https://guardian-main.vercel.app'] 
     : 'http://localhost:5173',
   credentials: true,
   methods: ['GET', 'POST', 'OPTIONS'],
