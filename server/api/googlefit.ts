@@ -3,7 +3,9 @@ import { google } from 'googleapis';
 const oauth2Client = new google.auth.OAuth2(
   '49939848628-43880hebju9j4mn6pqt1q3a97kp412t0.apps.googleusercontent.com',
   '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',
-  `${process.env.REDIRECT_URI || 'http://localhost:5173/oauth/callback'}`
+  process.env.NODE_ENV === 'production'
+    ? 'https://guardian-main.vercel.app/oauth/callback'
+    : 'http://localhost:3000/oauth/callback'
 );
 
 // Define the required scopes
