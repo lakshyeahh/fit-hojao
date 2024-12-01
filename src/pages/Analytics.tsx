@@ -129,9 +129,9 @@ export default function Analytics() {
         ? 'http://localhost:3000'
         : 'https://guardian-serverr.vercel.app'
       
-      console.log('Making API request to:', `${baseUrl}/api/google-fit`)
+      console.log('Making API request to:', `${baseUrl}/googlefit/data`)
       
-      const response = await fetch(`${baseUrl}/api/google-fit`, {
+      const response = await fetch(`${baseUrl}/googlefit/data`, {
         credentials: 'include',
         headers: {
           'Accept': 'application/json',
