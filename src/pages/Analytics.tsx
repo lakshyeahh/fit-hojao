@@ -60,9 +60,9 @@ const HealthMetricCard = ({
   subValue?: { label: string, value: string | number } | null
   trend?: { direction: 'up' | 'down', value: number } | null
 }) => (
-  <div className="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-2xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105">
+  <div className="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-2xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105 border border-gray-700">
     <div className="flex items-center mb-4">
-      <div className="p-3 bg-gray-700 rounded-full mr-4">
+      <div className="p-3 bg-gray-800/50 rounded-full mr-4 backdrop-blur-sm">
         <Icon className="w-6 h-6 text-[#c2ff00]" />
       </div>
       <span className="text-gray-300 font-semibold">{title}</span>
@@ -124,12 +124,8 @@ export default function Analytics() {
         throw new Error('No Google Fit access token found')
       }
 
-      const isDevelopment = import.meta.env.DEV
-      const baseUrl = isDevelopment 
-        ? 'http://localhost:3000'
-        : 'https://guardian-serverr.vercel.app'
-      
-      console.log('Making API request to:', `${baseUrl}/googlefit/data`)
+      const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000'
+      console.log('Making API request to:', `${baseUrl}/api/googlefit/data`)
       
       const response = await fetch(`${baseUrl}/googlefit/data`, {
         credentials: 'include',

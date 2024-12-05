@@ -62,7 +62,7 @@ export default function Dashboard() {
             <div className="p-6">
                 <div className="flex justify-between items-start mb-8">
                     <div>
-                        <h1 className="text-3xl font-bold">{greeting}, Alex</h1>
+                        <h1 className="text-3xl font-bold">{greeting}, CR7</h1>
                         <p className="text-gray-400">Let's check your performance</p>
                     </div>
                     <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center">
